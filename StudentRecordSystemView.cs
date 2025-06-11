@@ -65,31 +65,29 @@ namespace SRS
         private string? _currentGeneratedStudentNumber = null;
         private string GenerateStudentNumber()
         {
-            Random random = new Random();
-            int randomNumber = 0;
-            bool isUnique = false;
+            int nextStudentNumber = 0;
 
-            while (!isUnique)
+            string query = "SELECT MAX(student_no) FROM student_information";
+            using (MySqlConnection conn = new MySqlConnection("Server=localhost;Database=student_record_system;User=root;Password=;"))
             {
-                randomNumber = random.Next(1000, 10000);
-                string checkQuery = "SELECT COUNT(*) FROM student_information WHERE student_no = @StudentNumber";
-                using (MySqlConnection conn = new MySqlConnection("Server=localhost;Database=student_record_system;User=root;Password=;"))
+                conn.Open();
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
-                    conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(checkQuery, conn))
+                    object result = cmd.ExecuteScalar();
+                    if (result != DBNull.Value && result != null)
                     {
-                        cmd.Parameters.AddWithValue("@StudentNumber", randomNumber);
-                        int count = Convert.ToInt32(cmd.ExecuteScalar());
-                        if (count == 0)
+                        int lastNumber;
+                        if (int.TryParse(result.ToString(), out lastNumber))
                         {
-                            isUnique = true;
+                            nextStudentNumber = lastNumber + 1;
                         }
                     }
                 }
             }
 
-            return randomNumber.ToString();
+            return nextStudentNumber.ToString();
         }
+
 
 
         private void AddBtn_Click(object sender, EventArgs e)
@@ -421,6 +419,7 @@ namespace SRS
                 dataGridView1.Columns["student_no"].ReadOnly = true;
                 EditBtn.Text = "Save";
                 isEditing = true;
+                CancelBtn.Enabled = true;
             }
             else
             {
@@ -428,6 +427,7 @@ namespace SRS
                 EditBtn.Text = "Edit";
                 dataGridView1.ReadOnly = true;
                 isEditing = false;
+                CancelBtn.Enabled = false;
             }
         }
 
@@ -442,6 +442,15 @@ namespace SRS
                 AddBtn.Click += AddBtn_Click;
                 SearchBtn.Enabled = true;
 
+                CancelBtn.Enabled = false;
+            }
+
+            else if (isEditing)
+            {
+                isEditing = false;
+                EditBtn.Text = "Edit";
+                dataGridView1.ReadOnly = true;
+                //LoadStudentData();
                 CancelBtn.Enabled = false;
             }
         }
