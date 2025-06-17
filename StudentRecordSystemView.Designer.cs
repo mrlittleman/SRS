@@ -44,17 +44,18 @@
             BirthDateLabel = new Label();
             AddressField = new TextBox();
             RefreshBtn = new Button();
+            viewEnrollmentButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // StudentRecordDetailsTitle
             // 
             StudentRecordDetailsTitle.AutoSize = true;
-            StudentRecordDetailsTitle.Font = new Font("Segoe UI", 30F);
+            StudentRecordDetailsTitle.Font = new Font("Segoe UI", 28F, FontStyle.Bold);
             StudentRecordDetailsTitle.ForeColor = SystemColors.ControlDarkDark;
             StudentRecordDetailsTitle.Location = new Point(377, 0);
             StudentRecordDetailsTitle.Name = "StudentRecordDetailsTitle";
-            StudentRecordDetailsTitle.Size = new Size(427, 54);
+            StudentRecordDetailsTitle.Size = new Size(431, 51);
             StudentRecordDetailsTitle.TabIndex = 0;
             StudentRecordDetailsTitle.Text = "Student Record Details";
             // 
@@ -73,9 +74,10 @@
             // 
             // AddBtn
             // 
-            AddBtn.Location = new Point(882, 552);
+            AddBtn.Font = new Font("Segoe UI", 10F);
+            AddBtn.Location = new Point(765, 558);
             AddBtn.Name = "AddBtn";
-            AddBtn.Size = new Size(75, 23);
+            AddBtn.Size = new Size(120, 35);
             AddBtn.TabIndex = 2;
             AddBtn.Text = "Add";
             AddBtn.UseVisualStyleBackColor = true;
@@ -83,9 +85,10 @@
             // 
             // EditBtn
             // 
-            EditBtn.Location = new Point(639, 144);
+            EditBtn.Font = new Font("Segoe UI", 10F);
+            EditBtn.Location = new Point(639, 141);
             EditBtn.Name = "EditBtn";
-            EditBtn.Size = new Size(75, 23);
+            EditBtn.Size = new Size(120, 35);
             EditBtn.TabIndex = 3;
             EditBtn.Text = "Edit";
             EditBtn.UseVisualStyleBackColor = true;
@@ -93,9 +96,10 @@
             // 
             // SearchBtn
             // 
-            SearchBtn.Location = new Point(127, 144);
+            SearchBtn.Font = new Font("Segoe UI", 10F);
+            SearchBtn.Location = new Point(72, 141);
             SearchBtn.Name = "SearchBtn";
-            SearchBtn.Size = new Size(75, 23);
+            SearchBtn.Size = new Size(120, 35);
             SearchBtn.TabIndex = 4;
             SearchBtn.Text = "Search";
             SearchBtn.UseVisualStyleBackColor = true;
@@ -103,17 +107,19 @@
             // 
             // StudentNumberField
             // 
-            StudentNumberField.Location = new Point(208, 144);
+            StudentNumberField.Font = new Font("Segoe UI", 10F);
+            StudentNumberField.Location = new Point(198, 147);
             StudentNumberField.Name = "StudentNumberField";
             StudentNumberField.PlaceholderText = "Student Number";
-            StudentNumberField.Size = new Size(285, 23);
+            StudentNumberField.Size = new Size(250, 25);
             StudentNumberField.TabIndex = 5;
             // 
             // DeleteBtn
             // 
-            DeleteBtn.Location = new Point(729, 144);
+            DeleteBtn.Font = new Font("Segoe UI", 10F);
+            DeleteBtn.Location = new Point(765, 141);
             DeleteBtn.Name = "DeleteBtn";
-            DeleteBtn.Size = new Size(75, 23);
+            DeleteBtn.Size = new Size(120, 35);
             DeleteBtn.TabIndex = 6;
             DeleteBtn.Text = "Delete";
             DeleteBtn.UseVisualStyleBackColor = true;
@@ -121,9 +127,10 @@
             // 
             // CancelBtn
             // 
-            CancelBtn.Location = new Point(975, 552);
+            CancelBtn.Font = new Font("Segoe UI", 10F);
+            CancelBtn.Location = new Point(930, 558);
             CancelBtn.Name = "CancelBtn";
-            CancelBtn.Size = new Size(75, 23);
+            CancelBtn.Size = new Size(120, 35);
             CancelBtn.TabIndex = 7;
             CancelBtn.Text = "Cancel";
             CancelBtn.UseVisualStyleBackColor = true;
@@ -132,54 +139,60 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(127, 187);
+            dataGridView1.Location = new Point(72, 187);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(923, 226);
+            dataGridView1.Size = new Size(978, 226);
             dataGridView1.TabIndex = 8;
             // 
             // AddStudentNumberField
             // 
-            AddStudentNumberField.Location = new Point(127, 434);
+            AddStudentNumberField.Font = new Font("Segoe UI", 10F);
+            AddStudentNumberField.Location = new Point(72, 434);
             AddStudentNumberField.Name = "AddStudentNumberField";
             AddStudentNumberField.PlaceholderText = "Student Number";
-            AddStudentNumberField.Size = new Size(183, 23);
+            AddStudentNumberField.Size = new Size(250, 25);
             AddStudentNumberField.TabIndex = 9;
             // 
             // NameField
             // 
-            NameField.Location = new Point(127, 474);
+            NameField.Font = new Font("Segoe UI", 10F);
+            NameField.Location = new Point(72, 480);
             NameField.Name = "NameField";
             NameField.PlaceholderText = "Full Name";
-            NameField.Size = new Size(315, 23);
+            NameField.Size = new Size(315, 25);
             NameField.TabIndex = 10;
             // 
             // AgeField
             // 
-            AgeField.Location = new Point(127, 511);
+            AgeField.Font = new Font("Segoe UI", 10F);
+            AgeField.Location = new Point(72, 526);
             AgeField.Name = "AgeField";
             AgeField.PlaceholderText = "Age";
-            AgeField.Size = new Size(75, 23);
+            AgeField.Size = new Size(75, 25);
             AgeField.TabIndex = 11;
             // 
             // BirthDatePicker
             // 
-            BirthDatePicker.Location = new Point(192, 548);
+            BirthDatePicker.Font = new Font("Segoe UI", 10F);
+            BirthDatePicker.Location = new Point(187, 568);
             BirthDatePicker.Name = "BirthDatePicker";
-            BirthDatePicker.Size = new Size(200, 23);
+            BirthDatePicker.Size = new Size(200, 25);
             BirthDatePicker.TabIndex = 12;
             // 
             // BirthDateLabel
             // 
             BirthDateLabel.AutoSize = true;
+            BirthDateLabel.Font = new Font("Segoe UI", 10F);
             BirthDateLabel.ForeColor = SystemColors.ControlDarkDark;
-            BirthDateLabel.Location = new Point(127, 554);
+            BirthDateLabel.Location = new Point(72, 574);
             BirthDateLabel.Name = "BirthDateLabel";
-            BirthDateLabel.Size = new Size(59, 15);
+            BirthDateLabel.Size = new Size(71, 19);
             BirthDateLabel.TabIndex = 13;
             BirthDateLabel.Text = "Birth Date";
             // 
             // AddressField
             // 
+            AddressField.Font = new Font("Segoe UI", 10F);
             AddressField.Location = new Point(508, 434);
             AddressField.Multiline = true;
             AddressField.Name = "AddressField";
@@ -189,19 +202,32 @@
             // 
             // RefreshBtn
             // 
-            RefreshBtn.Location = new Point(975, 143);
+            RefreshBtn.Font = new Font("Segoe UI", 10F);
+            RefreshBtn.Location = new Point(930, 141);
             RefreshBtn.Name = "RefreshBtn";
-            RefreshBtn.Size = new Size(75, 23);
+            RefreshBtn.Size = new Size(120, 35);
             RefreshBtn.TabIndex = 15;
             RefreshBtn.Text = "Refresh";
             RefreshBtn.UseVisualStyleBackColor = true;
             RefreshBtn.Click += RefreshBtn_Click;
             // 
+            // viewEnrollmentButton
+            // 
+            viewEnrollmentButton.Enabled = false;
+            viewEnrollmentButton.Font = new Font("Segoe UI", 10F);
+            viewEnrollmentButton.Location = new Point(454, 141);
+            viewEnrollmentButton.Name = "viewEnrollmentButton";
+            viewEnrollmentButton.Size = new Size(150, 35);
+            viewEnrollmentButton.TabIndex = 0;
+            viewEnrollmentButton.Text = "View Enrollments";
+            viewEnrollmentButton.Click += ViewEnrollmentButton_Click;
+            // 
             // StudentRecordSystemView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1128, 606);
+            ClientSize = new Size(1128, 641);
+            Controls.Add(viewEnrollmentButton);
             Controls.Add(RefreshBtn);
             Controls.Add(AddressField);
             Controls.Add(BirthDateLabel);
@@ -227,6 +253,7 @@
             PerformLayout();
         }
 
+
         #endregion
 
         private Label StudentRecordDetailsTitle;
@@ -245,5 +272,6 @@
         private Label BirthDateLabel;
         private TextBox AddressField;
         private Button RefreshBtn;
+        private Button viewEnrollmentButton;
     }
 }

@@ -20,6 +20,7 @@ namespace SRS
             LoadStudentData();
             dataGridView1.ReadOnly = true;
             CancelBtn.Enabled = false;
+
         }
 
         private void LogoutLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -249,16 +250,9 @@ namespace SRS
                 return;
             }
 
-            string query;
-
-            if (studentNumber == 0)
-            {
-                query = "SELECT student_no, full_name, age, birth_date, address FROM student_information";
-            }
-            else
-            {
-                query = "SELECT student_no, full_name, age, birth_date, address FROM student_information WHERE student_no = @StudentNumber";
-            }
+            string query = studentNumber == 0 ?
+                "SELECT student_no, full_name, age, birth_date, address FROM student_information" :
+                "SELECT student_no, full_name, age, birth_date, address FROM student_information WHERE student_no = @StudentNumber";
 
             try
             {
@@ -280,26 +274,19 @@ namespace SRS
                         if (dataTable.Rows.Count > 0)
                         {
                             dataGridView1.DataSource = dataTable;
-                            dataGridView1.Columns["student_no"].HeaderText = "Student Number";
-                            dataGridView1.Columns["full_name"].HeaderText = "Full Name";
-                            dataGridView1.Columns["birth_date"].HeaderText = "Birth Date";
-                            dataGridView1.Columns["age"].HeaderText = "Age";
-                            dataGridView1.Columns["address"].HeaderText = "Address";
-
+                            // Enable the view enrollment button when student is found
+                            viewEnrollmentButton.Enabled = true;
                             EditBtn.Enabled = true;
                             DeleteBtn.Enabled = true;
                         }
                         else
                         {
                             MessageBox.Show("No students found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            viewEnrollmentButton.Enabled = false;
                             LoadStudentData();
                             EditBtn.Enabled = false;
                             DeleteBtn.Enabled = false;
                         }
-
-                        dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                        dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-                        dataGridView1.Refresh();
                     }
                 }
             }
@@ -357,7 +344,6 @@ namespace SRS
                         }
                     }
                 }
-                LoadStudentData();
             }
             catch (Exception ex)
             {
@@ -411,6 +397,8 @@ namespace SRS
             }
         }
 
+        private DataTable _originalData = null;
+
         private void EditBtn_Click(object sender, EventArgs e)
         {
             if (!isEditing)
@@ -420,6 +408,8 @@ namespace SRS
                 EditBtn.Text = "Save";
                 isEditing = true;
                 CancelBtn.Enabled = true;
+
+                _originalData = ((DataTable)dataGridView1.DataSource).Copy();
             }
             else
             {
@@ -447,10 +437,13 @@ namespace SRS
 
             else if (isEditing)
             {
+                if (_originalData != null)
+                {
+                    dataGridView1.DataSource = _originalData.Copy();
+                }
                 isEditing = false;
                 EditBtn.Text = "Edit";
                 dataGridView1.ReadOnly = true;
-                //LoadStudentData();
                 CancelBtn.Enabled = false;
             }
         }
@@ -459,5 +452,70 @@ namespace SRS
         {
             LoadStudentData();
         }
+        private void ViewStudentInfoButton_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(StudentNumberField.Text))
+            {
+                // Trigger the search again to reload student info
+                SearchBtn_Click(sender, e);
+            }
+            else
+            {
+                LoadStudentData();
+            }
+
+            viewEnrollmentButton.Text = "View Enrollments";
+            viewEnrollmentButton.Click -= ViewStudentInfoButton_Click;
+            viewEnrollmentButton.Click += ViewEnrollmentButton_Click;
+        }
+
+        private void ViewEnrollmentButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null || dataGridView1.CurrentRow.Cells["student_no"].Value == null)
+            {
+                MessageBox.Show("Please select a student first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string studentNo = dataGridView1.CurrentRow.Cells["student_no"].Value.ToString();
+            string fullName = dataGridView1.CurrentRow.Cells["full_name"].Value.ToString();
+
+            // Open the course enrollment window
+            CourseEnrollmentView enrollmentView = new CourseEnrollmentView(studentNo, fullName);
+            enrollmentView.ShowDialog();
+        }
+
+        //private void LoadStudentEnrollments(string studentNo)
+        //{
+        //    string query = @"SELECT e.enrollment_id, c.course_code, c.course_name, c.credit_hours, e.enrollment_date, e.status 
+        //            FROM student_enrollments e
+        //            JOIN courses c ON e.course_id = c.course_id
+        //            WHERE e.student_no = @StudentNo";
+
+        //    try
+        //    {
+        //        using (MySqlConnection conn = new MySqlConnection("Server=localhost;Database=student_record_system;User=root;Password=;"))
+        //        {
+        //            conn.Open();
+
+        //            MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
+        //            adapter.SelectCommand.Parameters.AddWithValue("@StudentNo", studentNo);
+        //            DataTable dt = new DataTable();
+        //            adapter.Fill(dt);
+
+        //            dataGridView1.DataSource = dt;
+        //            dataGridView1.Columns["enrollment_id"].Visible = false;
+        //            dataGridView1.Columns["course_code"].HeaderText = "Course Code";
+        //            dataGridView1.Columns["course_name"].HeaderText = "Course Name";
+        //            dataGridView1.Columns["credit_hours"].HeaderText = "Credits";
+        //            dataGridView1.Columns["enrollment_date"].HeaderText = "Enrollment Date";
+        //            dataGridView1.Columns["status"].HeaderText = "Status";
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Error loading enrollments: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
     }
 }
