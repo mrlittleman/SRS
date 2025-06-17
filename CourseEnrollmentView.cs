@@ -46,10 +46,18 @@ namespace SRS
                     if (enrolledCoursesGrid.Columns.Contains("enrollment_id"))
                         enrolledCoursesGrid.Columns["enrollment_id"].Visible = false;
 
+                    // Rename column headers
+                    enrolledCoursesGrid.Columns["course_code"].HeaderText = "Course Code";
+                    enrolledCoursesGrid.Columns["course_name"].HeaderText = "Course Name";
+                    enrolledCoursesGrid.Columns["credit_hours"].HeaderText = "Credit Hours";
+                    enrolledCoursesGrid.Columns["enrollment_date"].HeaderText = "Enrollment Date";
+
                     enrolledCoursesGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     enrolledCoursesGrid.AutoResizeColumns();
                     enrolledCoursesGrid.AutoResizeRows();
-                    enrolledCoursesGrid.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+                    enrolledCoursesGrid.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular);
+                    enrolledCoursesGrid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    enrolledCoursesGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
                     enrolledCoursesGrid.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 }
             }
@@ -81,14 +89,20 @@ namespace SRS
 
                     availableCoursesGrid.DataSource = dt;
 
-
                     if (availableCoursesGrid.Columns.Contains("course_id"))
                         availableCoursesGrid.Columns["course_id"].Visible = false;
+
+                    // Rename column headers
+                    availableCoursesGrid.Columns["course_code"].HeaderText = "Course Code";
+                    availableCoursesGrid.Columns["course_name"].HeaderText = "Course Name";
+                    availableCoursesGrid.Columns["credit_hours"].HeaderText = "Credit Hours";
 
                     availableCoursesGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     availableCoursesGrid.AutoResizeColumns();
                     availableCoursesGrid.AutoResizeRows();
-                    availableCoursesGrid.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+                    availableCoursesGrid.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular);
+                    availableCoursesGrid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    availableCoursesGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
                     availableCoursesGrid.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 }
             }
